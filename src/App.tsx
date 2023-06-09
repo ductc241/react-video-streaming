@@ -1,8 +1,17 @@
-import ReactPlayer from "react-player/youtube";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./modules/Home";
 
 const App = () => {
   return (
-    <ReactPlayer url="https://www.youtube.com/watch?v=VE8BkImUciY" controls />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="shorts" element={"Shorst"} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 export default App;
