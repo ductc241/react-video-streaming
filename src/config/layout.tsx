@@ -11,7 +11,6 @@ import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 
 export interface INavItems {
   title: string;
-  isCollapse: boolean;
   items: {
     name: string;
     icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
@@ -22,7 +21,6 @@ export interface INavItems {
 export const navItems: INavItems[] = [
   {
     title: "New Feeds",
-    isCollapse: false,
     items: [
       {
         name: "Home",
@@ -43,7 +41,6 @@ export const navItems: INavItems[] = [
   },
   {
     title: "Personal",
-    isCollapse: false,
     items: [
       {
         name: "Library",
@@ -59,37 +56,6 @@ export const navItems: INavItems[] = [
         name: "Liked videos",
         icon: FavoriteBorderOutlinedIcon,
         url: "/liked",
-      },
-    ],
-  },
-  {
-    title: "Explore",
-    isCollapse: true,
-    items: [
-      {
-        name: "Trending",
-        icon: WhatshotOutlinedIcon,
-        url: "/trending",
-      },
-      {
-        name: "Music",
-        icon: WhatshotOutlinedIcon,
-        url: "/music",
-      },
-      {
-        name: "Gaming",
-        icon: WhatshotOutlinedIcon,
-        url: "/gaming",
-      },
-      {
-        name: "News",
-        icon: WhatshotOutlinedIcon,
-        url: "/news",
-      },
-      {
-        name: "Sport",
-        icon: WhatshotOutlinedIcon,
-        url: "/sports",
       },
     ],
   },

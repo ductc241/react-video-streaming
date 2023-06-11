@@ -4,7 +4,6 @@ import {
   TextField,
   InputAdornment,
   IconButton,
-  Box,
   Avatar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -12,9 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   return (
-    <AppBar
-      sx={{ pl: "270px", backgroundColor: "transparent", boxShadow: "none" }}
-    >
+    <AppBar sx={{ pl: "270px", backgroundColor: "white", boxShadow: "none" }}>
       <Toolbar
         sx={{ minHeight: { xs: "100px" }, justifyContent: "space-between" }}
         style={{ padding: "0 32px" }}
@@ -42,7 +39,7 @@ const Header = () => {
             },
 
             "& .MuiInputBase-input": {
-              padding: "15px 10px",
+              padding: "13px 10px",
             },
           }}
           placeholder="Search everything..."
