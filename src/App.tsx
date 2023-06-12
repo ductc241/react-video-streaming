@@ -6,7 +6,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="react-video-streaming" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="shorts" element={"Shorst"} />
         </Route>

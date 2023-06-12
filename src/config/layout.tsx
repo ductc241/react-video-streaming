@@ -7,7 +7,6 @@ import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 
 export interface INavItems {
   title: string;

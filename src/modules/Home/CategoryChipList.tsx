@@ -9,11 +9,16 @@ import {
 } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import categoryServices from "../../api/category";
+import { ICategoryItem } from "../../interfaces/category";
+import videoServices from "../../api/video";
 
 const CategoryChipList = () => {
   const theme = useTheme();
 
   const stackRef = useRef<HTMLDivElement>();
+
+  const [categories, setCategories] = useState<ICategoryItem[]>([]);
 
   const [step, setStep] = useState<number>(0);
   const [isShowControl, setIsShowControl] = useState<boolean>(false);
@@ -21,6 +26,20 @@ const CategoryChipList = () => {
   const [maxToScroll, setMaxToScroll] = useState<number>(0);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    const getCategoryData = async () => {
+      try {
+        const { data } = await categoryServices.getList();
+        setCategories(data.items);
+        // const { data } = await videoServices.getVideos();
+        // console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategoryData();
+  }, []);
 
   useEffect(() => {
     if (!stackRef.current) return;
@@ -44,7 +63,7 @@ const CategoryChipList = () => {
       setStep(stackRef.current.children[0].clientWidth + 12);
       setMaxToScroll(stackRef.current.offsetWidth - totalLength);
     }
-  }, []);
+  }, [categories]);
 
   return (
     <Box
@@ -72,13 +91,11 @@ const CategoryChipList = () => {
         }}
         ref={stackRef as any}
       >
-        {[
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        ].map(item => (
+        {categories.map(category => (
           <Chip
-            label="musix"
+            label={category.snippet.title}
             sx={{ height: 40, px: 1, borderRadius: 2 }}
-            key={item}
+            key={category.id}
           />
         ))}
       </Stack>
@@ -87,13 +104,7 @@ const CategoryChipList = () => {
         <Box component="div" id="scroll-control" sx={{ display: "none" }}>
           {scrollWidth > 0 && (
             <IconButton
-              sx={{
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                left: 0,
-                ml: 0,
-              }}
+              sx={{ position: "absolute", top: 0, bottom: 0, left: 0, ml: 0 }}
               onClick={() => setScrollWidth(prev => prev - step * 2)}
             >
               <ChevronLeftIcon />

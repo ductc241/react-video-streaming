@@ -12,3 +12,5 @@
 2. Video Viewing
 3. Comments
 4. Likes
+
+### How to get API key

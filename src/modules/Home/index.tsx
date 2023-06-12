@@ -1,60 +1,34 @@
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
-import CategoryChipList from "./CategoryChipList";
+import { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 
-const index = () => {
+import CategoryChipList from "./CategoryChipList";
+import VideoCart from "../../components/VideoCart";
+import videoServices from "../../api/video";
+import { IVideo } from "../../interfaces/video";
+
+const Home = () => {
+  const [videos, setVideos] = useState<IVideo[]>([]);
+
+  useEffect(() => {
+    const getVideos = async () => {
+      try {
+        const { data } = await videoServices.getVideos();
+        setVideos(data.items);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getVideos();
+  }, []);
+
   return (
     <>
-      <Box
-        sx={{
-          mb: 3,
-          overflow: "hidden",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-        }}
-      >
-        <CategoryChipList />
-      </Box>
+      <CategoryChipList />
 
       <Grid container spacing={3}>
-        {[1, 2, 3, 4, 5].map(item => (
-          <Grid item xs={3} key={item}>
-            <Card sx={{ boxShadow: "none" }}>
-              <CardMedia
-                component="img"
-                alt="green iguana"
-                image="https://picsum.photos/seed/picsum/600"
-                sx={{
-                  height: 200,
-                  borderRadius: 4,
-                }}
-              />
-              <CardContent sx={{ px: 0 }}>
-                <Stack direction="row" gap={2}>
-                  <Avatar alt="image profile" src="https://picsum.photos/200" />
-                  <Box>
-                    <Typography gutterBottom variant="body1" fontWeight="600">
-                      Snowfall in The Lofoten Islands
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Nomadic Ambience
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      2 Tr lượt xem - 1 năm trước
-                    </Typography>
-                  </Box>
-                </Stack>
-              </CardContent>
-            </Card>
+        {videos.map((item, index) => (
+          <Grid item xs={3} key={index}>
+            <VideoCart direction="column" data={item} />
           </Grid>
         ))}
       </Grid>
@@ -62,4 +36,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Home;
