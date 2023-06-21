@@ -1,5 +1,7 @@
 # React App with Material UI, YouTube API
 
+⚠ Project temporarily paused, will resume in the future.
+
 ## Techs
 
 1. React
