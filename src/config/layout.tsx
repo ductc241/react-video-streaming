@@ -24,7 +24,7 @@ export const navItems: INavItems[] = [
       {
         name: "Home",
         icon: ExploreOutlinedIcon,
-        url: "/",
+        url: "/react-video-streaming",
       },
       {
         name: "Shorts",
@@ -61,4 +61,4 @@ export const navItems: INavItems[] = [
 ];
 
 export const drawerWidth = "270px";
-export const headerHeight = "100px";
+export const headerHeight = "70px";

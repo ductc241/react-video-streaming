@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { Box, Container } from "@mui/material";
-import Header from "./components/Header";
+import { Box } from "@mui/material";
 import AppDrawer from "./components/Drawer";
+import Header from "./components/Header";
+import { headerHeight } from "../../config/layout";
 
 const MainLayout = () => {
   return (
@@ -11,9 +12,10 @@ const MainLayout = () => {
       <Box
         component="main"
         sx={{
-          mt: "100px",
+          mt: headerHeight,
           px: 4,
-          maxWidth: "calc(100vw - 270px)",
+          py: 3,
+          width: "calc(100vw - 270px)",
           overflow: "hidden",
         }}
       >

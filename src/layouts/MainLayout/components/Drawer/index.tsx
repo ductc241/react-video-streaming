@@ -1,7 +1,7 @@
 import { Box, Drawer, Toolbar, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import NavGroup from "./NavGroup";
-import { navItems } from "../../../../config/layout";
+import { drawerWidth, headerHeight, navItems } from "../../../../config/layout";
 
 const AppDrawer = () => {
   const theme = useTheme();
@@ -11,10 +11,10 @@ const AppDrawer = () => {
       <Drawer
         variant="permanent"
         sx={{
-          width: "270px",
+          width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: "270px",
+            width: drawerWidth,
             boxShadow: "none",
             overflow: "hidden",
           },
@@ -44,7 +44,7 @@ const AppDrawer = () => {
         }}
       >
         <Toolbar
-          sx={{ display: "flex", minHeight: { xs: "100px" } }}
+          sx={{ display: "flex", minHeight: { xs: headerHeight } }}
           style={{ padding: "0 32px" }}
         >
           <Typography variant="h5" fontWeight="600">
@@ -59,7 +59,7 @@ const AppDrawer = () => {
           </Typography>
         </Toolbar>
 
-        <Box>
+        <Box sx={{ mt: 3 }}>
           {navItems.map((item, index) => (
             <NavGroup data={item} key={index} />
           ))}

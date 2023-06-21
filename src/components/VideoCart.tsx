@@ -6,6 +6,7 @@ import {
   CardContent,
   CardMedia,
   styled,
+  Tooltip,
 } from "@mui/material";
 import Card, { CardProps } from "@mui/material/Card";
 
@@ -26,24 +27,40 @@ const CartCustom = styled(Card, {
 })<ICardCustom>(({ direction }) => ({
   display: "flex",
 
-  ...(direction === "column"
-    ? {
-        flexDirection: "column",
-      }
-    : {
-        flexDirection: "row",
-      }),
+  "& .MuiCardContent-root": {
+    padding: 0,
+  },
+
+  ...(direction === "column" && {
+    flexDirection: "column",
+    rowGap: 15,
+  }),
+
+  ...(direction === "row" && {
+    flexDirection: "row",
+    columnGap: 10,
+  }),
 }));
 
 const VideoCart = ({ direction, data }: IVideoCard) => {
+  const { id, snippet } = data;
+
   return (
     <CartCustom sx={{ boxShadow: "none" }} direction={direction}>
       <CardMedia
         component="img"
         alt="green iguana"
-        image={data.snippet.thumbnails.medium.url}
+        image={snippet.thumbnails.medium.url}
         sx={{
-          height: data.snippet.thumbnails.medium.height,
+          ...(direction === "column" && {
+            height: snippet.thumbnails.medium.height,
+          }),
+
+          ...(direction === "row" && {
+            width: 190,
+            height: 120,
+          }),
+
           borderRadius: 4,
         }}
       />
@@ -56,35 +73,39 @@ const VideoCart = ({ direction, data }: IVideoCard) => {
         }}
       >
         <Stack direction="row" gap={2}>
-          <Avatar alt="image profile" src="https://picsum.photos/200" />
+          {direction === "column" && (
+            <Avatar alt="image profile" src="https://picsum.photos/200" />
+          )}
           <Box>
             <Link
-              to={`video/${data.id.videoId}`}
+              to={`video/${id.videoId}`}
               style={{
                 color: "black",
                 textDecoration: "none",
               }}
             >
-              <Typography
-                gutterBottom
-                variant="body1"
-                sx={{
-                  fontWeight: 600,
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: "2",
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                }}
-              >
-                {data.snippet.title}
-              </Typography>
+              <Tooltip title={snippet.title} placement="bottom-start">
+                <Typography
+                  gutterBottom
+                  variant="body1"
+                  sx={{
+                    fontWeight: 600,
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    WebkitLineClamp: "2",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                  }}
+                >
+                  {snippet.title}
+                </Typography>
+              </Tooltip>
             </Link>
             <Typography variant="body2" color="text.secondary">
-              {data.snippet.channelTitle}
+              {snippet.channelTitle}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {data.snippet.publishTime}
+              {snippet.publishTime}
             </Typography>
           </Box>
         </Stack>
